@@ -86,7 +86,7 @@
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .stat { display: flex; align-items: center; gap: 14px; }
   .stat .icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.06); }
-  .stat h3 { margin: 0; font-size: clamp(18px, 2.6vw, 26px); line-height: 1; }
+  .stat h3 { margin: 0; font-size: clamp(16px, 2.6vw, 20px); line-height: 1; }
   .stat p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
   
   /* ---------- Timeline ---------- */
@@ -266,4 +266,5 @@
   .contact .contact-item { white-space: nowrap; overflow-wrap: anywhere; }
   .contact .sep { opacity: .6; }
   @media (max-width: 520px) { .contact .contact-item { white-space: normal; word-break: break-word; } }
+
   
