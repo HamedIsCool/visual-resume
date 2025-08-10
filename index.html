@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Hamed Noroozi — Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The dynamic resume of Hamed Noroozi, powered by Supabase." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23E11D48%22/><text x=%2250%22 y=%2258%22 font-size=%2255%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22>HN</text></svg>">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <!-- Header -->
+    <header class="hero" role="banner">
+      <div class="avatar" id="avatar-initials" aria-hidden="true">HN</div>
+      <div>
+        <h1 class="name">Hamed Noroozi</h1>
+        <p class="role">Product Owner | Business Analysis | Automation</p>
+        <p class="contact"><span id="contact"></span></p>
+      </div>
+    </header>
+
+    <!-- Impact -->
+    <section aria-labelledby="impact">
+      <h2 id="impact">Impact Highlights</h2>
+      <div class="stats" id="impact-stats"></div>
+    </section>
+
+    <!-- Experience -->
+    <section aria-labelledby="experience">
+      <h2 id="experience">Professional Experience</h2>
+      <div class="card">
+        <div class="timeline" id="timeline-list" role="list"></div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section aria-labelledby="skills">
+      <h2 id="skills">Skills</h2>
+      <div class="skills" id="skills-grid"></div>
+    </section>
+
+    <!-- Projects -->
+    <section aria-labelledby="projects">
+      <h2 id="projects">Selected Projects</h2>
+      <div class="grid" id="projects-grid"></div>
+    </section>
+
+    <!-- Education -->
+    <section aria-labelledby="edu">
+      <h2 id="edu">Education & Certifications</h2>
+      <div class="card" id="education-card"></div>
+    </section>
+
+    <div class="actions" aria-label="Actions">
+      <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+  </div>
+
+  <!-- App (module) -->
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
