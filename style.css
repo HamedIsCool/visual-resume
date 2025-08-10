@@ -32,7 +32,8 @@
       radial-gradient(800px 600px at 110% 10%, rgba(59,130,246,.12), transparent 60%),
       var(--bg);
     color: var(--text);
-    font: 15px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    /* Fluid base size: 14–16px depending on viewport */
+    font: clamp(14px, 1.6vw, 16px)/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   }
   
   .wrap { max-width: var(--maxw); margin: 40px auto; padding: 0 20px 80px; }
@@ -57,11 +58,12 @@
     box-shadow: 0 0 0 6px var(--ring);
     user-select: none;
   }
-  .name { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: .3px; }
+  .name { margin: 0; font-size: clamp(22px, 3vw, 28px); font-weight: 800; letter-spacing: .3px; }
   .role { margin: 4px 0 0; color: var(--muted); font-weight: 600; }
   .contact { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); }
   .contact a { color: inherit; text-decoration: none; border-bottom: 1px dotted transparent; }
   .contact a:hover { border-bottom-color: currentColor; }
+  .hero > div { min-width: 0; } /* allow wrapping in grid */
   
   /* Sections & Cards */
   section h2 {
@@ -80,13 +82,17 @@
   }
   
   /* Summary */
-  #summary-card p { margin: 0; line-height: 1.55; }
+  #summary-card p { margin: 0; line-height: 1.6; }
   
   /* Impact */
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
   .stat { display: flex; align-items: center; gap: 14px; }
   .stat .icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.06); }
-  .stat h3 { margin: 0; font-size: 26px; line-height: 1; }
+  .stat h3 { margin: 0; font-size: clamp(18px, 2.6vw, 26px); line-height: 1; }
   .stat p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
   
   /* ---------- Timeline ---------- */
@@ -126,11 +132,7 @@
   .tl-org { color: var(--muted); font-style: italic; }
   .tl-meta { white-space: nowrap; color: var(--muted); font-size: 13px; }
   .tl-body { grid-column: 2; position: relative; z-index: 1; }
-  .tl-body ul {
-    list-style-position: outside;
-    padding-left: 20px;
-    margin: 0;
-  }
+  .tl-body ul { list-style-position: outside; padding-left: 20px; margin: 0; }
   .tl-body li { margin: 8px 0; }
   
   /* Skills */
@@ -149,7 +151,11 @@
   }
   
   /* Projects */
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
   .project-title { margin: 0 0 8px; }
   .project-summary { margin: 10px 0 0; }
   .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -195,17 +201,34 @@
     .tl-item:before { box-shadow: none; }
   }
   
-  /* Responsive */
+  /* ---------- RESPONSIVE BREAKPOINTS ---------- */
+  /* ≤ 1080px: relax grids a bit */
+  @media (max-width: 1080px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  /* ≤ 920px: hero compacts, stats to 2 cols */
   @media (max-width: 920px) {
-    .grid { grid-template-columns: 1fr; }
     .hero { grid-template-columns: 72px 1fr; }
     .avatar { width: 72px; height: 72px; font-size: 22px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
     .skill-line { grid-template-columns: 1fr; }
   }
   
+  /* ≤ 700px: shrink timeline gutter/dot, allow tighter layout */
+  @media (max-width: 700px) {
+    .timeline:before { left: 18px; }
+    .tl-item { grid-template-columns: 36px 1fr; }
+    .tl-item:before { left: 12px; width: 12px; height: 12px; box-shadow: 0 0 0 4px var(--ring); }
+  }
+  
+  /* ≤ 600px: single column grids */
+  @media (max-width: 600px) {
+    .stats { grid-template-columns: 1fr; }
+    .grid  { grid-template-columns: 1fr; }
+  }
+  
   /* CONTACT FIXES */
-  .hero > div { min-width: 0; }
-  .contact { display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); }
   #contact { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   .contact .contact-item { white-space: nowrap; overflow-wrap: anywhere; }
   .contact .sep { opacity: .6; }
