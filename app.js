@@ -27,6 +27,28 @@ function displayUrl(u='') {
   }
 }
 
+// Pretty location + work format
+function placeWithFormat(x){
+  const loc = [x.city, x.country].filter(Boolean).join(', ')
+  const f = (x.format || '').toString().trim().toLowerCase()
+
+  if (!f && !loc) return ''          // nothing to show
+  if (f === 'remote') {
+    return loc ? `Remote — based in ${loc}` : 'Remote'
+  }
+  if (f === 'hybrid') {
+    return loc ? `${loc} (Hybrid)` : 'Hybrid'
+  }
+  if (f === 'onsite') {
+    return loc ? `${loc} (Onsite)` : 'Onsite'
+  }
+  if (f === 'contract') {
+    return loc ? `${loc} (Contract)` : 'Contract'
+  }
+  // Unknown/custom value
+  return f ? (loc ? `${loc} (${x.format})` : x.format) : loc
+}
+
 // ---- Reveal ----
 ;(() => {
   const els = document.querySelectorAll('.card, header.hero, section')
@@ -116,15 +138,21 @@ async function loadImpact() {
 // ========== EXPERIENCE ==========
 async function loadExperiences() {
   const { data, error } = await sb
-    .from('experiences').select('*').eq('published', true)
-    .order('start_date', { ascending: false }).order('order_index', { ascending: true })
+    .from('experiences')                // format column is included via select('*')
+    .select('*')
+    .eq('published', true)
+    .order('start_date', { ascending: false })
+    .order('order_index', { ascending: true })
+
   if (error) { console.error('[experiences]', error); return }
+
   const tl = $('#timeline-list')
   const html = (data || []).map(x => {
-    const where  = [x.city, x.country].filter(Boolean).join(', ')
     const start  = x.start_date ? fmt(x.start_date) : ''
     const end    = x.end_date ? fmt(x.end_date) : 'Present'
+    const where  = placeWithFormat(x) // <-- NEW
     const bullets = (x.bullets || []).map(b => `<li>${esc(b)}</li>`).join('')
+
     return `
       <article class="tl-item" role="listitem">
         <div class="tl-head">
@@ -138,6 +166,7 @@ async function loadExperiences() {
       </article>
     `
   }).join('')
+
   if (tl) tl.innerHTML = html || '<div class="tl-item"><div class="tl-body">No experience yet.</div></div>'
 }
 
@@ -237,7 +266,7 @@ async function loadEducation() {
     loadProfile(),
     loadSummary(),
     loadImpact(),
-    loadExperiences(),
+    loadExperiences(),  // now shows format + location
     loadSkills(),
     loadProjects(),
     loadEducation()
