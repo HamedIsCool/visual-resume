@@ -32,7 +32,7 @@ function placeWithFormat(x){
   const loc = [x.city, x.country].filter(Boolean).join(', ')
   const f = (x.format || '').toString().trim().toLowerCase()
 
-  if (!f && !loc) return ''          // nothing to show
+  if (!f && !loc) return ''
   if (f === 'remote') {
     return loc ? `Remote — based in ${loc}` : 'Remote'
   }
@@ -45,7 +45,6 @@ function placeWithFormat(x){
   if (f === 'contract') {
     return loc ? `${loc} (Contract)` : 'Contract'
   }
-  // Unknown/custom value
   return f ? (loc ? `${loc} (${x.format})` : x.format) : loc
 }
 
@@ -138,7 +137,7 @@ async function loadImpact() {
 // ========== EXPERIENCE ==========
 async function loadExperiences() {
   const { data, error } = await sb
-    .from('experiences')                // format column is included via select('*')
+    .from('experiences')
     .select('*')
     .eq('published', true)
     .order('start_date', { ascending: false })
@@ -150,7 +149,7 @@ async function loadExperiences() {
   const html = (data || []).map(x => {
     const start  = x.start_date ? fmt(x.start_date) : ''
     const end    = x.end_date ? fmt(x.end_date) : 'Present'
-    const where  = placeWithFormat(x) // <-- NEW
+    const where  = placeWithFormat(x)
     const bullets = (x.bullets || []).map(b => `<li>${esc(b)}</li>`).join('')
 
     return `
@@ -266,7 +265,7 @@ async function loadEducation() {
     loadProfile(),
     loadSummary(),
     loadImpact(),
-    loadExperiences(),  // now shows format + location
+    loadExperiences(),
     loadSkills(),
     loadProjects(),
     loadEducation()
