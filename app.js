@@ -162,21 +162,48 @@ async function loadSkills() {
   if (grid) grid.innerHTML = blocks.join('') || '<div class="card">No skills yet.</div>'
 }
 
+// Small SVG icons for project buttons
+const ICONS = {
+  demo: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v12H4zM8 20h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  github: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.61-3.37-1.19-3.37-1.19-.45-1.15-1.11-1.46-1.11-1.46-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.26-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.03A9.56 9.56 0 0112 6.8c.85 0 1.71.12 2.51.34 1.9-1.3 2.74-1.03 2.74-1.03.55 1.41.2 2.45.1 2.71.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85 0 1.34-.01 2.43-.01 2.76 0 .26.18.58.69.48A10 10 0 0012 2z" stroke="currentColor" stroke-width="1.5"/></svg>`,
+  doc: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16l6-3 6 3V8l-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+}
+
 // ========== PROJECTS ==========
 async function loadProjects() {
   const { data, error } = await sb
-    .from('projects').select('*').eq('published', true).order('order_index', { ascending: true })
+    .from('projects')
+    .select('*')
+    .eq('published', true)
+    .order('order_index', { ascending: true })
+
   if (error) { console.error('[projects]', error); return }
+
   const grid = $('#projects-grid')
-  const html = (data || []).map(p => `
-    <article class="card">
-      <h3 class="project-title">${esc(p.name)}</h3>
-      <div class="tag-row">
-        ${(p.tags || []).map(t => `<span class="tag chip"><span class="dot"></span>${esc(t)}</span>`).join('')}
-      </div>
-      ${p.summary ? `<p class="project-summary">${esc(p.summary)}</p>` : ''}
-    </article>
-  `).join('')
+  const html = (data || []).map(p => {
+    const tags = (p.tags || []).map(t => `<span class="tag chip"><span class="dot"></span>${esc(t)}</span>`).join('')
+
+    const title = p.link || p.demo_url
+      ? `<a href="${esc(addHttps(p.link || p.demo_url))}" target="_blank" rel="noopener">${esc(p.name)}</a>`
+      : esc(p.name)
+
+    const links = [
+      p.demo_url ? `<a class="btn-link" href="${esc(addHttps(p.demo_url))}" target="_blank" rel="noopener">${ICONS.demo}<span>Live demo</span></a>` : '',
+      p.repo_url ? `<a class="btn-link" href="${esc(addHttps(p.repo_url))}" target="_blank" rel="noopener">${ICONS.github}<span>GitHub</span></a>` : '',
+      p.case_study_url ? `<a class="btn-link" href="${esc(addHttps(p.case_study_url))}" target="_blank" rel="noopener">${ICONS.doc}<span>Case study</span></a>` : ''
+    ].filter(Boolean).join('')
+
+    return `
+      <article class="card">
+        ${p.image_url ? `<img class="project-thumb" src="${esc(p.image_url)}" alt="${esc(p.name)} thumbnail">` : ''}
+        <h3 class="project-title">${title}</h3>
+        <div class="tag-row">${tags}</div>
+        ${p.summary ? `<p class="project-summary">${esc(p.summary)}</p>` : ''}
+        ${links ? `<div class="project-links">${links}</div>` : ''}
+      </article>
+    `
+  }).join('')
+
   if (grid) grid.innerHTML = html || '<div class="card">No projects yet.</div>'
 }
 
@@ -208,7 +235,7 @@ async function loadEducation() {
 ;(async () => {
   await Promise.allSettled([
     loadProfile(),
-    loadSummary(),   // 👈 added
+    loadSummary(),
     loadImpact(),
     loadExperiences(),
     loadSkills(),

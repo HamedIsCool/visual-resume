@@ -157,7 +157,17 @@
     gap: 16px;
   }
   .project-title { margin: 0 0 8px; }
-  .project-summary { margin: 10px 0 0; }
+  .project-title a { color: var(--text); text-decoration: none; }
+  .project-title a:hover { color: var(--accent3); }
+  .project-thumb {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    object-fit: cover;
+  }
+  .project-summary { margin: 10px 0 12px; }
   .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
   .tag.chip {
     display: inline-flex; align-items: center; gap: 8px;
@@ -173,6 +183,24 @@
     background: var(--accent3);
     box-shadow: 0 0 0 2px rgba(59,130,246,.25);
   }
+  
+  /* Project action buttons */
+  .project-links {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 8px;
+  }
+  .btn-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.04);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600; font-size: 13px;
+  }
+  .btn-link:hover { border-color: rgba(255,255,255,.30); background: rgba(255,255,255,.07); }
+  .btn-link svg { width: 16px; height: 16px; }
   
   /* Actions */
   .actions { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
@@ -202,27 +230,18 @@
   }
   
   /* ---------- RESPONSIVE BREAKPOINTS ---------- */
-  /* ≤ 1080px: relax grids a bit */
-  @media (max-width: 1080px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  /* ≤ 920px: hero compacts, stats to 2 cols */
+  @media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 920px) {
     .hero { grid-template-columns: 72px 1fr; }
     .avatar { width: 72px; height: 72px; font-size: 22px; }
     .stats { grid-template-columns: repeat(2, 1fr); }
     .skill-line { grid-template-columns: 1fr; }
   }
-  
-  /* ≤ 700px: shrink timeline gutter/dot, allow tighter layout */
   @media (max-width: 700px) {
     .timeline:before { left: 18px; }
     .tl-item { grid-template-columns: 36px 1fr; }
     .tl-item:before { left: 12px; width: 12px; height: 12px; box-shadow: 0 0 0 4px var(--ring); }
   }
-  
-  /* ≤ 600px: single column grids */
   @media (max-width: 600px) {
     .stats { grid-template-columns: 1fr; }
     .grid  { grid-template-columns: 1fr; }
