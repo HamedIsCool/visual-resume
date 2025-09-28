@@ -2,108 +2,153 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Hamed Noroozi - Digital</title>
+  <title>Hamed Noroozi — Blog • Resume • Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="The dynamic resume of Hamed Noroozi, powered by Supabase." />
-  <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23E11D48%22/><text x=%2250%22 y=%2258%22 font-size=%2255%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22>HN</text></svg>"> -->
+  <meta name="description" content="Hamed Noroozi — blog, dynamic resume, and portfolio." />
   <link rel="stylesheet" href="./style.css" />
+  <style id="blog-title-override">
+    /* Make all blog titles black */
+    #route-blog #blog-list h3 a,
+    #route-blog .medium-body h3 a,
+    #route-blog #blog-post h1 {
+      color: #000 !important;
+    }
+  </style>  
   <link rel="icon" type="image/png" sizes="32x32" href="public/favicon-32x32.png">
 </head>
 <body>
   <div class="wrap">
-    <!-- Header -->
-    <header class="hero" role="banner">
-      <div class="avatar" id="avatar-initials" aria-hidden="true">HN</div>
-      <div>
-        <h1 class="name">Hamed Noroozi</h1>
-        <p class="role">Product Owner | Business Analyst | Transformational Leader</p>
-        <p class="contact"><span id="contact"></span></p>
-      </div>
-    </header>
 
-    <!-- Summary -->
-    <section aria-labelledby="summary">
-      <h2 id="summary">Summary</h2>
-      <div class="card" id="summary-card">
-        <p>Loading...</p>
-      </div>
-    </section>
-
-    <!-- Impact -->
-    <section aria-labelledby="impact">
-      <h2 id="impact">Impact Highlights</h2>
-      <div class="stats" id="impact-stats"></div>
-    </section>
-
-    <!-- Experience -->
-    <section aria-labelledby="experience">
-      <h2 id="experience">Professional Experience</h2>
-      <div class="card">
-        <div class="timeline" id="timeline-list" role="list"></div>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section aria-labelledby="skills">
-      <h2 id="skills">Skills</h2>
-      <div class="skills" id="skills-grid"></div>
-    </section>
-
-    <!-- Projects -->
-    <section aria-labelledby="projects">
-      <h2 id="projects">Selected Projects</h2>
-      <div class="grid" id="projects-grid"></div>
-    </section>
-
-    <!-- Education -->
-    <section aria-labelledby="edu">
-      <h2 id="edu">Education & Certifications</h2>
-      <div class="card" id="education-card"></div>
-    </section>
-
-    <!-- Connect (CTA) -->
-    <section aria-labelledby="connect">
-      <h2 id="connect">Connect</h2>
-      <div class="card cta-card">
-        <div class="cta-buttons">
-          <!-- LinkedIn -->
-          <a class="btn brand linkedin" target="_blank" rel="noopener"
-             href="https://www.linkedin.com/in/noroozihamed/" aria-label="Connect on LinkedIn">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.98h4.52V24H.24zM8.14 8.98h4.33v2.05h.06c.6-1.14 2.06-2.35 4.24-2.35 4.54 0 5.38 2.99 5.38 6.88V24h-4.71v-6.75c0-1.61-.03-3.68-2.24-3.68-2.24 0-2.58 1.75-2.58 3.56V24H8.14z"/></svg>
-            <span>Connect on LinkedIn</span>
+    <!-- Route: Home chooser -->
+    <section id="route-home" class="route" aria-labelledby="home-chooser-title">
+      <h2 id="home-chooser-title" class="sr-only">Choose a section</h2>
+      <div class="card chooser">
+        <h1 class="chooser-title">What are you looking for?</h1>
+        <p class="chooser-sub">Pick a destination to get started.</p>
+        <div class="chooser-grid">
+          <a class="chooser-item" href="#/blog" aria-label="Go to Hamed’s Blog">
+            <div class="chooser-emoji" aria-hidden="true">✍️</div>
+            <div>
+              <div class="chooser-head">Hamed’s Blog</div>
+              <div class="chooser-desc">Have a story to be told</div>
+            </div>
           </a>
-          <!-- WhatsApp -->
-          <a class="btn brand whatsapp" target="_blank" rel="noopener"
-             href="https://wa.me/994503404702?text=Hi%20Hamed%2C%20I%20found%20your%20resume%20and%20would%20like%20to%20connect."
-             aria-label="Message on WhatsApp">
-            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.11 17.19c-.29-.14-1.66-.82-1.92-.91-.26-.1-.45-.14-.64.14-.19.29-.74.91-.91 1.1-.17.19-.34.22-.63.08-.29-.14-1.23-.45-2.34-1.43-.86-.76-1.43-1.7-1.6-1.99-.17-.29-.02-.45.13-.59.14-.14.29-.34.43-.51.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.14-.64-1.54-.87-2.11-.23-.55-.47-.47-.64-.47-.17 0-.36-.02-.55-.02-.19 0-.5.07-.76.36-.26.29-1 1-1 2.45s1.03 2.84 1.18 3.04c.14.19 2.03 3.1 4.92 4.34.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.12.56-.08 1.66-.68 1.9-1.34s.24-1.22.17-1.34c-.07-.12-.26-.19-.55-.33zM16.02 3C9.93 3 5 7.93 5 14.02c0 2.43.76 4.69 2.05 6.55L5 29l8.64-2.27c1.78 1.15 3.9 1.82 6.18 1.82 6.09 0 11.02-4.93 11.02-11.02S22.11 3 16.02 3zm0 19.9c-2.3 0-4.43-.84-6.09-2.23l-.43-.34-5.1 1.34 1.37-4.97-.35-.5c-1.16-1.61-1.84-3.58-1.84-5.71 0-5.37 4.37-9.74 9.74-9.74s9.74 4.37 9.74 9.74-4.37 9.74-9.74 9.74z"/></svg>
-            <span>Message on WhatsApp</span>
+          <a class="chooser-item" href="#/resume" aria-label="Go to Resume">
+            <div class="chooser-emoji" aria-hidden="true">📄</div>
+            <div>
+              <div class="chooser-head">Resume</div>
+              <div class="chooser-desc">Experience, projects, skills, education.</div>
+            </div>
           </a>
-          <!-- Download PDF -->
-          <button type="button" class="btn brand pdf" onclick="window.print()" aria-label="Download PDF Resume">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 21h12v-7H6v7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Download PDF</span>
-          </button>
+          <a class="chooser-item" href="#/portfolio" aria-label="Go to Portfolio">
+            <div class="chooser-emoji" aria-hidden="true">🗂️</div>
+            <div>
+              <div class="chooser-head">Portfolio</div>
+              <div class="chooser-desc">Take a deeper look at my projects</div>
+            </div>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Actions (keep if you like quick print at top-level) -->
-    <!-- <div class="actions" aria-label="Actions">
-      <button class="btn" onclick="window.print()">Print / Save as PDF</button>
-    </div> -->
+    <!-- Route: Resume (your current content kept intact) -->
+    <main id="route-resume" class="route" aria-label="Resume">
+      <!-- Header -->
+      <header class="hero" role="banner">
+        <div class="avatar" id="avatar-initials" aria-hidden="true">HN</div>
+        <div>
+          <h1 class="name">Hamed Noroozi</h1>
+          <p class="role">Product Owner | Business Analyst | Transformational Leader</p>
+          <p class="contact"><span id="contact"></span></p>
+        </div>
+      </header>
+
+      <!-- Summary -->
+      <section aria-labelledby="summary">
+        <h2 id="summary">Summary</h2>
+        <div class="card" id="summary-card"><p>Loading...</p></div>
+      </section>
+
+      <!-- Impact -->
+      <section aria-labelledby="impact">
+        <h2 id="impact">Impact Highlights</h2>
+        <div class="stats" id="impact-stats"></div>
+      </section>
+
+      <!-- Experience -->
+      <section aria-labelledby="experience">
+        <h2 id="experience">Professional Experience</h2>
+        <div class="card"><div class="timeline" id="timeline-list" role="list"></div></div>
+      </section>
+
+      <!-- Skills -->
+      <section aria-labelledby="skills">
+        <h2 id="skills">Skills</h2>
+        <div class="skills" id="skills-grid"></div>
+      </section>
+
+      <!-- Projects -->
+      <section aria-labelledby="projects">
+        <h2 id="projects">Selected Projects</h2>
+        <div class="grid" id="projects-grid"></div>
+      </section>
+
+      <!-- Education -->
+      <section aria-labelledby="edu">
+        <h2 id="edu">Education & Certifications</h2>
+        <div class="card" id="education-card"></div>
+      </section>
+
+      <!-- Connect (CTA) -->
+      <section aria-labelledby="connect">
+        <h2 id="connect">Connect</h2>
+        <div class="card cta-card">
+          <div class="cta-buttons">
+            <a class="btn brand linkedin" target="_blank" rel="noopener"
+               href="https://www.linkedin.com/in/noroozihamed/" aria-label="Connect on LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.98h4.52V24H.24zM8.14 8.98h4.33v2.05h.06c.6-1.14 2.06-2.35 4.24-2.35 4.54 0 5.38 2.99 5.38 6.88V24h-4.71v-6.75c0-1.61-.03-3.68-2.24-3.68-2.24 0-2.58 1.75-2.58 3.56V24H8.14z"/></svg>
+              <span>Connect on LinkedIn</span>
+            </a>
+            <a class="btn brand whatsapp" target="_blank" rel="noopener"
+               href="https://wa.me/994503404702?text=Hi%20Hamed%2C%20I%20found%20your%20resume%20and%20would%20like%20to%20connect."
+               aria-label="Message on WhatsApp">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.11 17.19c-.29-.14-1.66-.82-1.92-.91-.26-.1-.45-.14-.64.14-.19.29-.74.91-.91 1.1-.17.19-.34.22-.63.08-.29-.14-1.23-.45-2.34-1.43-.86-.76-1.43-1.7-1.6-1.99-.17-.29-.02-.45.13-.59.14-.14.29-.34.43-.51.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.14-.64-1.54-.87-2.11-.23-.55-.47-.47-.64-.47-.17 0-.36-.02-.55-.02-.19 0-.5.07-.76.36-.26.29-1 1-1 2.45s1.03 2.84 1.18 3.04c.14.19 2.03 3.1 4.92 4.34.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.12.56-.08 1.66-.68 1.9-1.34s.24-1.22.17-1.34c-.07-.12-.26-.19-.55-.33zM16.02 3C9.93 3 5 7.93 5 14.02c0 2.43.76 4.69 2.05 6.55L5 29l8.64-2.27c1.78 1.15 3.9 1.82 6.18 1.82 6.09 0 11.02-4.93 11.02-11.02S22.11 3 16.02 3zm0 19.9c-2.3 0-4.43-.84-6.09-2.23l-.43-.34-5.1 1.34 1.37-4.97-.35-.5c-1.16-1.61-1.84-3.58-1.84-5.71 0-5.37 4.37-9.74 9.74-9.74s9.74 4.37 9.74 9.74-4.37 9.74-9.74 9.74z"/></svg>
+              <span>Message on WhatsApp</span>
+            </a>
+            <button type="button" class="btn brand pdf" onclick="window.print()" aria-label="Download PDF Resume">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 21h12v-7H6v7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Download PDF</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+ <!-- Route: Blog -->
+<section id="route-blog" class="route" aria-labelledby="blog-title">
+  <h2 id="blog-title">Blog</h2>
+
+  <div class="card" id="medium-card">Loading Medium…</div>
+  <!-- <div class="card" id="blog-list">Loading posts…</div> -->
+  <div class="card" id="blog-post" hidden></div>
+</section>
+
+    <!-- Route: Portfolio (Notion embed) -->
+    <section id="route-portfolio" class="route" aria-labelledby="portfolio-title">
+      <h2 id="portfolio-title">Portfolio</h2>
+      <div class="card">
+        <!-- <p class="muted">This page embeds your live Notion portfolio.</p> -->
+        <div class="notion-embed">
+          <iframe
+            src="https://hamed-wonderland.notion.site/ebd/27a60a9614ca804f9599dcd933babd32"
+            width="100%" height="700" frameborder="0" allowfullscreen
+            title="Hamed’s Notion Portfolio"></iframe>
+        </div>
+      </div>
+    </section>
+
   </div>
 
-  <!-- Floating WhatsApp -->
-  <!-- <a class="floating-whatsapp"
-     href="https://wa.me/994503404702?text=Hi%20Hamed%2C%20I%20found%20your%20resume%20and%20would%20like%20to%20connect."
-     target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.11 17.19c-.29-.14-1.66-.82-1.92-.91-.26-.1-.45-.14-.64.14-.19.29-.74.91-.91 1.1-.17.19-.34.22-.63.08-.29-.14-1.23-.45-2.34-1.43-.86-.76-1.43-1.7-1.6-1.99-.17-.29-.02-.45.13-.59.14-.14.29-.34.43-.51.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.14-.64-1.54-.87-2.11-.23-.55-.47-.47-.64-.47-.17 0-.36-.02-.55-.02-.19 0-.5.07-.76.36-.26.29-1 1-1 2.45s1.03 2.84 1.18 3.04c.14.19 2.03 3.1 4.92 4.34.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.12.56-.08 1.66-.68 1.9-1.34s.24-1.22.17-1.34c-.07-.12-.26-.19-.55-.33zM16.02 3C9.93 3 5 7.93 5 14.02c0 2.43.76 4.69 2.05 6.55L5 29l8.64-2.27c1.78 1.15 3.9 1.82 6.18 1.82 6.09 0 11.02-4.93 11.02-11.02S22.11 3 16.02 3zm0 19.9c-2.3 0-4.43-.84-6.09-2.23l-.43-.34-5.1 1.34 1.37-4.97-.35-.5c-1.16-1.61-1.84-3.58-1.84-5.71 0-5.37 4.37-9.74 9.74-9.74s9.74 4.37 9.74 9.74-4.37 9.74-9.74 9.74z"/></svg>
-  </a> -->
-
-  <!-- App (module) -->
   <script type="module" src="./app.js"></script>
 </body>
 </html>
-
-

@@ -1,0 +1,5 @@
+project_id = "xdyakuhwzgxvqcwtfxbb"
+
+[functions]
+[functions.medium-latest]
+verify_jwt = false
