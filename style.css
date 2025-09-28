@@ -367,16 +367,17 @@ section h2 {
 .contact .sep { opacity: .6; }
 @media (max-width: 520px) { .contact .contact-item { white-space: normal; word-break: break-word; } }
 
-/* Center the Home chooser vertically + horizontally */
-#route-home {
-  min-height: 80vh;      /* fallback */
-  min-height: 80dvh;     /* dynamic vh for mobile UI */
+
+/* Center the Home chooser ONLY when the route is active */
+#route-home.route.active {
+  min-height: 80vh;     /* or 100vh if you prefer */
+  min-height: 80dvh;
   display: grid;
   place-items: center;
 }
 
 #route-home .chooser {
-  width: min(1440px, 100%);
+  width: min(1080px, 100%);
   margin: 0 auto;
   text-align: center;
 }
