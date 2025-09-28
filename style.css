@@ -366,3 +366,17 @@ section h2 {
 .contact .contact-item { white-space: nowrap; overflow-wrap: anywhere; }
 .contact .sep { opacity: .6; }
 @media (max-width: 520px) { .contact .contact-item { white-space: normal; word-break: break-word; } }
+
+/* Center the Home chooser vertically + horizontally */
+#route-home {
+  min-height: 80vh;      /* fallback */
+  min-height: 80dvh;     /* dynamic vh for mobile UI */
+  display: grid;
+  place-items: center;
+}
+
+#route-home .chooser {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  text-align: center;
+}
