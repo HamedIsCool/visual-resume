@@ -7,16 +7,42 @@
   <meta name="description" content="Hamed Noroozi — blog, dynamic resume, and portfolio." />
   <link rel="stylesheet" href="./style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="public/favicon-32x32.png">
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PZVJQG7W');</script>
+  <!-- End Google Tag Manager -->
 </head>
 <body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZVJQG7W"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Top bar: logo + back button -->
+  <header class="topbar">
+    <a href="#/home" class="brand" aria-label="Go to Home">
+      <!-- Replace this with your higher-res logo -->
+      <img id="brand-logo" src="public/logo-256.png" alt="Hamed Noroozi logo" hidden>
+    </a>
+    <!-- IMPORTANT: id matches JS (updateTopbarBack) -->
+    <a id="back-home-link" class="back-home" href="#/home" hidden>← Back to Home</a>
+  </header>
+
   <div class="wrap">
 
     <!-- Route: Home chooser -->
     <section id="route-home" class="route" aria-labelledby="home-chooser-title">
       <h2 id="home-chooser-title" class="sr-only">Choose a section</h2>
+
       <div class="card chooser">
         <h1 class="chooser-title">What brings you here today?</h1>
         <p class="chooser-sub">Pick a destination to get started.</p>
+
         <div class="chooser-grid">
           <a class="chooser-item" href="#/blog" aria-label="Go to Hamed’s Blog">
             <div class="chooser-emoji" aria-hidden="true">✍️</div>
@@ -25,6 +51,7 @@
               <div class="chooser-desc">Have a story to be told</div>
             </div>
           </a>
+
           <a class="chooser-item" href="#/resume" aria-label="Go to Resume">
             <div class="chooser-emoji" aria-hidden="true">📄</div>
             <div>
@@ -32,6 +59,7 @@
               <div class="chooser-desc">Experience, projects, skills, education.</div>
             </div>
           </a>
+
           <a class="chooser-item" href="#/portfolio" aria-label="Go to Portfolio">
             <div class="chooser-emoji" aria-hidden="true">🗂️</div>
             <div>
@@ -41,9 +69,14 @@
           </a>
         </div>
       </div>
+
+      <!-- Home socials (filled by JS from Supabase links) -->
+      <div class="card home-socials">
+        <div id="socials-row" class="socials-row"></div>
+      </div>
     </section>
 
-    <!-- Route: Resume (your current content kept intact) -->
+    <!-- Route: Resume -->
     <main id="route-resume" class="route" aria-label="Resume">
       <!-- Header -->
       <header class="hero" role="banner">
@@ -116,20 +149,18 @@
       </section>
     </main>
 
- <!-- Route: Blog -->
-<section id="route-blog" class="route" aria-labelledby="blog-title">
-  <h2 id="blog-title">Blog</h2>
-
-  <div class="card" id="medium-card">Loading Medium…</div>
-  <!-- <div class="card" id="blog-list">Loading posts…</div> -->
-  <div class="card" id="blog-post" hidden></div>
-</section>
+    <!-- Route: Blog -->
+    <section id="route-blog" class="route" aria-labelledby="blog-title">
+      <h2 id="blog-title">Blog</h2>
+      <div class="card" id="medium-card">Loading Medium…</div>
+      <!-- <div class="card" id="blog-list">Loading posts…</div> -->
+      <div class="card" id="blog-post" hidden></div>
+    </section>
 
     <!-- Route: Portfolio (Notion embed) -->
     <section id="route-portfolio" class="route" aria-labelledby="portfolio-title">
       <h2 id="portfolio-title">Portfolio</h2>
       <div class="card">
-        <!-- <p class="muted">This page embeds your live Notion portfolio.</p> -->
         <div class="notion-embed">
           <iframe
             src="https://hamed-wonderland.notion.site/ebd/27a60a9614ca804f9599dcd933babd32"
@@ -141,6 +172,15 @@
 
   </div>
 
+  <!-- Single footer -->
+  <!-- <footer class="site-footer">
+    <div class="wrap">
+      <div id="footer-socials" class="socials-row"></div>
+      <p class="muted" style="margin-top:10px">© <span id="year"></span> Hamed Noroozi</p>
+    </div>
+  </footer> -->
+
   <script type="module" src="./app.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
