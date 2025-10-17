@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="public/favicon-32x32.png">
   <link rel="canonical" href="https://hamed.digital/" />
   <link rel="preconnect" href="https://xdyakuhwzgxvqcwtfxbb.supabase.co" crossorigin>
-  <link rel="preconnect" href="https://www.googletagmanager.com">  
+  <link rel="preconnect" href="https://www.googletagmanager.com">
 
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -26,107 +26,88 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <!-- Top bar: logo + back button -->
+  <!-- Top bar: logo only -->
   <header class="topbar">
     <a href="#/home" class="brand" aria-label="Go to Home">
-      <!-- Replace this with your higher-res logo -->
-      <img id="brand-logo" src="public/logo-256.png" alt="Hamed Noroozi logo" hidden>
+      <img id="brand-logo" src="public/logo-256.png" alt="Hamed Noroozi logo">
     </a>
-    <!-- IMPORTANT: id matches JS (updateTopbarBack) -->
   </header>
-  <!-- git checkout -b main                                                      -->
+
   <div class="wrap">
 
-    <!-- Route: Home chooser -->
-    <section id="route-home" class="route" aria-labelledby="home-chooser-title">
-      <h2 id="home-chooser-title" class="sr-only">Choose a section</h2>
+    <!-- Route: Home (NEW STYLE) -->
+    <section id="route-home" class="route active" aria-labelledby="home-title">
+      <h2 id="home-title" class="sr-only">Home</h2>
 
-      <div class="card chooser">
-        <h1 class="chooser-title">What brings you here today?</h1>
-        <p class="chooser-sub">Pick a destination to get started.</p>
+      <!-- Profile Card -->
+      <div class="profile-card">
+        <h1 class="name">Hamed Noroozi</h1>
+        <p class="role">Product Owner • Innovator • Storyteller</p>
 
-        <div class="chooser-grid">
-          <a class="chooser-item" href="#/blog" aria-label="Go to Hamed’s Blog">
-            <div class="chooser-emoji" aria-hidden="true">✍️</div>
-            <div>
-              <div class="chooser-head">Hamed’s Blog</div>
-              <div class="chooser-desc">Have a story to be told</div>
-            </div>
-          </a>
-
-          <a class="chooser-item" href="#/resume" aria-label="Go to Resume">
-            <div class="chooser-emoji" aria-hidden="true">📄</div>
-            <div>
-              <div class="chooser-head">Resume</div>
-              <div class="chooser-desc">Experience, projects, skills, education.</div>
-            </div>
-          </a>
-
-          <a class="chooser-item" href="#/portfolio" aria-label="Go to Portfolio">
-            <div class="chooser-emoji" aria-hidden="true">🗂️</div>
-            <div>
-              <div class="chooser-head">Portfolio</div>
-              <div class="chooser-desc">Take a deeper look at my projects</div>
-            </div>
-          </a>
-        </div>
+        <!-- Icon-only socials (filled by JS from Supabase) -->
+        <div id="socials-row" class="socials-row"></div>
       </div>
 
-      <!-- Home socials (filled by JS from Supabase links) -->
-      <div class="card home-socials">
-        <div id="socials-row" class="socials-row"></div>
+      <!-- Feature Blocks -->
+      <div class="feature-grid">
+        <a href="#/resume" class="feature-block">
+          <h2>Resume</h2>
+          <p>Experience, projects, skills, education.</p>
+        </a>
+        <a href="#/blog" class="feature-block">
+          <h2>Hamed’s Blog</h2>
+          <p>Have a story to be told.</p>
+        </a>
+        <a href="#/portfolio" class="feature-block">
+          <h2>Portfolio</h2>
+          <p>Take a deeper look at my projects.</p>
+        </a>
+        <!-- Calendly will be injected by JS (replaces this placeholder) -->
+        <div id="calendly-block"></div>
       </div>
     </section>
 
-    <!-- Route: Resume -->
+    <!-- Route: Resume (unchanged look) -->
     <main id="route-resume" class="route" aria-label="Resume">
-      <!-- Header -->
       <header class="hero" role="banner">
         <div class="avatar" id="avatar-initials" aria-hidden="true">HN</div>
         <div>
           <h1 class="name">Hamed Noroozi</h1>
-          <p class="role">Product Owner | Business Analyst | Transformational Leader</p>
+          <p class="role">Product Owner • Innovator • Storyteller</p>
           <p class="contact"><span id="contact"></span></p>
         </div>
       </header>
 
-      <!-- Summary -->
       <section aria-labelledby="summary">
         <h2 id="summary">Summary</h2>
         <div class="card" id="summary-card"><p>Loading...</p></div>
       </section>
 
-      <!-- Impact -->
       <section aria-labelledby="impact">
         <h2 id="impact">Impact Highlights</h2>
         <div class="stats" id="impact-stats"></div>
       </section>
 
-      <!-- Experience -->
       <section aria-labelledby="experience">
         <h2 id="experience">Professional Experience</h2>
         <div class="card"><div class="timeline" id="timeline-list" role="list"></div></div>
       </section>
 
-      <!-- Skills -->
       <section aria-labelledby="skills">
         <h2 id="skills">Skills</h2>
         <div class="skills" id="skills-grid"></div>
       </section>
 
-      <!-- Projects -->
       <section aria-labelledby="projects">
         <h2 id="projects">Selected Projects</h2>
         <div class="grid" id="projects-grid"></div>
       </section>
 
-      <!-- Education -->
       <section aria-labelledby="edu">
         <h2 id="edu">Education & Certifications</h2>
         <div class="card" id="education-card"></div>
       </section>
 
-      <!-- Connect (CTA) -->
       <section aria-labelledby="connect">
         <h2 id="connect">Connect</h2>
         <div class="card cta-card">
@@ -154,12 +135,11 @@
     <!-- Route: Blog -->
     <section id="route-blog" class="route" aria-labelledby="blog-title">
       <h2 id="blog-title">Blog</h2>
-      <div class="card" id="medium-card">Loading Medium…</div>
-      <!-- <div class="card" id="blog-list">Loading posts…</div> -->
+      <div id="medium-card" class="medium-list">Loading Medium…</div>
       <div class="card" id="blog-post" hidden></div>
     </section>
 
-    <!-- Route: Portfolio (Notion embed) -->
+    <!-- Route: Portfolio -->
     <section id="route-portfolio" class="route" aria-labelledby="portfolio-title">
       <h2 id="portfolio-title">Portfolio</h2>
       <div class="card">
@@ -174,15 +154,6 @@
 
   </div>
 
-  <!-- Single footer -->
-  <!-- <footer class="site-footer">
-    <div class="wrap">
-      <div id="footer-socials" class="socials-row"></div>
-      <p class="muted" style="margin-top:10px">© <span id="year"></span> Hamed Noroozi</p>
-    </div>
-  </footer> -->
-
   <script type="module" src="./app.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
